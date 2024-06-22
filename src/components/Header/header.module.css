@@ -1,22 +1,57 @@
 .header {
     display: flex;
-    gap: 20px;
-    border: 1px solid grey;
-    padding: 20px;
-    background-color: antiquewhite;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 20px; */
     cursor: pointer;
   }
-  .link {
+
+  .logo {
+    display: flex;
+    gap: 8px;
+    font-weight: 500;
+font-size: 20px;
+line-height: 120%;
+letter-spacing: -0.02em;
+color: #121417;
+  }
+
+  .navigation {
+    display: flex;
+    gap: 28px;
+  }
+
+  .registration {
+    display: flex;
+    gap: 16px;
+  }
+
+  .circle {
+    background-color: #8A8A89;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    /* border: 1px solid blue; */
+  }
+  .linkNavigation {
     text-decoration: none;
-    color: #000;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    line-height: 125%;
+    color: #121417;
+  }
+
+  .linkRegistration {
+    text-decoration: none;
+font-weight: 700;
+font-size: 16px;
+line-height: 125%;
+color: #8a8a89;
   }
   
-  .link:global(.active) {
+  /* .link:global(.active) {
     color: red;
   }
   
   .error {
     color: red;
-  }
+  } */
