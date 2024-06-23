@@ -2,8 +2,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 20px; */
+    padding-left: 64px;
+    padding-right: 64px;
     cursor: pointer;
+    margin-bottom: 20px;
   }
 
   .logo {
@@ -24,6 +26,7 @@ color: #121417;
   .registration {
     display: flex;
     gap: 16px;
+    align-items: center;
   }
 
   .circle {
@@ -40,18 +43,40 @@ color: #121417;
     color: #121417;
   }
 
-  .linkRegistration {
-    text-decoration: none;
+  .btnLogin {
+    border: none;
+    background-color: transparent;
 font-weight: 700;
 font-size: 16px;
 line-height: 125%;
 color: #8a8a89;
   }
+
+  .btnLogin span {
+    margin-left: 8px;
+  }
+
+
+  .btnRegistration {
+    font-weight: 700;
+    border: none;
+font-size: 16px;
+line-height: 125%;
+color: #fff;
+background-color: #8a8a89;
+border-radius: 12px;
+padding: 14px 39px;
+width: 166px;
+height: 48px;
+
+  }
+
   
-  /* .link:global(.active) {
+  
+  .linkNavigation:global(.active) {
     color: red;
   }
   
-  .error {
+  /* .error {
     color: red;
   } */
