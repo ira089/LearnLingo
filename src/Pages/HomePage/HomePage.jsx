@@ -7,7 +7,7 @@ import styles from './homePage.module.css';
  const HomePage = () => {
   return (
     <>
-       <section className={styles.wrapWelcome}>
+       <section className={styles.wrap}>
           <Welcome/>
           <div className={styles.wrapImg}>
              <img className={styles.img} alt='teacher' src={DefaultImg} />
