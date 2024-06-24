@@ -31,7 +31,6 @@ import styles from './ModalLogIn.module.css'
 
   const {register, handleSubmit, reset, formState:{errors, isValid}  } = useForm({
     initialValues: {
-             name: '',
              email: '',
              password: '',
           },
@@ -39,9 +38,9 @@ import styles from './ModalLogIn.module.css'
     resolver:yupResolver(shema.schemaLogin)
   })
   return (
-    <div>
-      <h2>Log In</h2>
-      <p>Welcome back! Please enter your credentials to access your
+    <div className={styles.wrap}>
+      <h2 className={styles.title}>Log In</h2>
+      <p className={styles.text}>Welcome back! Please enter your credentials to access your<br/>
          account and continue your search for an teacher.</p>
       <form className={styles.form} onSubmit={handleSubmit(submit)} autoComplete="off">
           
