@@ -1,0 +1,35 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;  
+}
+
+.label {
+    position: relative;  
+}
+
+.input {
+    width: 400px;
+padding: 18px 18px 18px 18px;
+    background-color: #F7F7F7;
+    border: transparent;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: #101828; 
+}
+
+.passInputWrap {
+    position: relative; 
+}
+
+.btnHide {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-50%, 50%);
+    opacity: 0.4;
+    background-color: transparent;
+    cursor: pointer;  
+}
