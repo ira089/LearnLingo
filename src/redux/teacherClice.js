@@ -7,6 +7,7 @@ import {
   } from '../functions/functions';
 
   const handleFulfilledGet = (state, { payload }) => {
+    console.log(payload)
     handleFulfilled(state);
     state.items = payload;
   };

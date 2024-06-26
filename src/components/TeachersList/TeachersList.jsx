@@ -1,31 +1,33 @@
 import React, { useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import * as teacherSelectors from '../../redux/teacherSelectors';
+import {  useDispatch } from 'react-redux';
+// import * as teacherSelectors from '../../redux/teacherSelectors';
 import * as teacherOperations from '../../redux/teacherOperations';
 // import styles from './teachersList.module.css';
 import TeacherItem from 'components/TeacherItem/TeacherItem'
-import {fireTeacherAll} from '../../../src/firebase'
+import {database} from '../../firebase/firebase'
+import {  ref, onValue } from "firebase/database";
 
 
  const TeachersList = () => {
 
-console.log(fireTeacherAll())
+// console.log(fireTeacherAll())
   // const database = getDatabase(app);
-//  console.log(database);
-//  let teachersArr = [];
-//  onValue(ref(database, '/teachers'), (s) => {
-//     if(s.exists()) teachersArr = s.val();
-//     console.log(teachersArr)
-// })
+ console.log(database);
+ let teachersArr = [];
+ onValue(ref(database, '/teachers'), (s) => {
+    if(s.exists()) teachersArr = s.val();
+    console.log(teachersArr)
+})
 
 
 
   const dispatch = useDispatch();
-  const {items} = useSelector(teacherSelectors.selectTeacher)
+  // const {items} = useSelector(teacherSelectors.selectTeacher)
   useEffect(() => {
-    dispatch(teacherOperations.getTeachersThunk());
+    dispatch(teacherOperations.getTeachersThunk(teachersArr));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-console.log(items)
+// console.log(items)
   return (
     <TeacherItem/>
   )

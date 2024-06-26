@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -28,20 +28,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 //  console.log(database);
- let teachersArr = []
+//  let teachersArr = []
 //  onValue(ref(database, '/teachers'), (s) => {
 //     if(s.exists()) qwe = s.val();
 //     console.log(qwe[0].name)
 // })
 
-export const fireTeacherAll = () => {
-    onValue(ref(database, '/teachers'), (s) => {
-        if(s.exists()) teachersArr = s.val();
-        // console.log(teachersArr)
-        return teachersArr
-    })
+// export const fireTeacherAll = () => {
+//     onValue(ref(database, '/teachers'), (s) => {
+//         if(s.exists()) teachersArr = s.val();
+//         console.log(teachersArr)
+//         return teachersArr
+//     })
 
-}
+// }
 
 
 
