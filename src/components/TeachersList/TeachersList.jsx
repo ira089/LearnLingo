@@ -1,41 +1,79 @@
-import React, { useEffect} from 'react'
-import {  useDispatch, useSelector } from 'react-redux';
-import * as teacherSelectors from '../../redux/teacherSelectors';
+import React, { useEffect, useState, useRef} from 'react'
+// import {  useDispatch, useSelector } from 'react-redux';
+// import * as teacherSelectors from '../../redux/teacherSelectors';
 // import * as teacherOperations from '../../redux/teacherOperations';
-import { getTeacher } from '../../redux/teacherClice'; 
+// import { getTeacher } from '../../redux/teacherClice'; 
 // import styles from './teachersList.module.css';
 import TeacherItem from 'components/TeacherItem/TeacherItem'
-import {database} from '../../firebase/firebase'
-import {  ref, onValue } from "firebase/database";
+// import {database} from '../../firebase/firebase'
+import {  ref,  query, limitToFirst, startAfter, getDatabase, orderByKey, get} from "firebase/database";
 
 
  const TeachersList = () => {
+  const [teachers, setTeachers] = useState([]);
+  const [lastKey, setLastKey] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const initialLoad = useRef(true);
 
-// console.log(fireTeacherAll())
-  // const database = getDatabase(app);
-//  console.log(database);
- let teachersArr = [];
- onValue(ref(database, '/teachers'), (s) => {
-    if(s.exists()) teachersArr = s.val();
-    console.log(teachersArr)
-})
+  const database = getDatabase();
+  const fetchTeachers = async (key = null) => {
+    setLoading(true);
+    let teachersQuery;
+    if (key) {
+      teachersQuery = query(ref(database, 'teachers'), orderByKey(), startAfter(key), limitToFirst(4));
+    } else {
+      teachersQuery = query(ref(database, 'teachers'), orderByKey(), limitToFirst(4));
+    }
 
+    const snapshot = await get(teachersQuery);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const teachersList = Object.entries(data).map(([key, value]) => ({
+        id: key,
+        ...value,
+      }));
 
+      setTeachers((prevTeachers) => [...prevTeachers, ...teachersList]);
+      setLastKey(teachersList.length ? teachersList[teachersList.length - 1].id : null);
+    }
+    setLoading(false);
+  };
 
-  const dispatch = useDispatch();
-dispatch(getTeacher({...teachersArr}))
+  useEffect(() => {
+    if (initialLoad.current) {
+      fetchTeachers();
+      initialLoad.current = false; // Сбрасываем флаг после первой загрузки
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [database]);
 
-  const {items} = useSelector(teacherSelectors.selectTeacher)
-  // useEffect(() => {
+  
+  
+  // onValue(ref(database, '/teachers'), (s) => {
+    //     if(s.exists()) teachersArr = s.val();
+    //     console.log(teachersArr)
+    // })
     
-  //   dispatch(getTeacher({...teachersArr}))
+  const loadMoreTeachers = () => {
+    if (lastKey) {
+      fetchTeachers(lastKey);
+    }
+  }; 
+  console.log(teachers)
 
-  // }, []);
-console.log(items)
 
   return (
-    <TeacherItem/>
+    <div>
+      <TeacherItem teachers={teachers}/>
+      {loading && <p>Loading...</p>}
+      {!loading && lastKey && <button onClick={loadMoreTeachers}>Load More</button>}
+
+    </div>
+    
   )
 }
 
 export default TeachersList
+
+// let queryNew =  query(ref(database, 'teachers'), limitToFirst(4));
+// console.log(queryNew)
