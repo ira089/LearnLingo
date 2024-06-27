@@ -16,8 +16,7 @@ import styles from '../ModalLogIn/ModalLogIn.module.css'
   const dispatch = useDispatch();
 
   const submit = async (evt) => {
-    const 
-    displayName = evt.name;
+    // const displayName = evt.name;
     const email = evt.email;
     const password = evt.password;
 
@@ -34,11 +33,17 @@ import styles from '../ModalLogIn/ModalLogIn.module.css'
            }
 
            const auth = getAuth();
-           createUserWithEmailAndPassword(auth, email, password, displayName)
-               .then(console.log)
-               .catch(console.error)
+           createUserWithEmailAndPassword(auth,  email, password )
+               .then(({user}) => {
+                console.log(user)
+                dispatch(setUser({
+                  email: user.email,
+                  id: user.uid,
+                  token: user.accessToken,
+                }))
+               })
+               .catch(() => alert('Invalid user!'))
                    
-        // dispatch(logIn({ ...formData }))
     reset();
   }
 

@@ -32,10 +32,17 @@ import styles from './ModalLogIn.module.css'
 
   const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)
-      .then(console.log)
-      .catch(console.error)
+      .then(({user}) => {
+        console.log(user)
+                dispatch(setUser({
+                  email: user.email,
+                  id: user.uid,
+                  token: user.accessToken,
+                }))
+
+      })
+      .catch(() => alert('Invalid user!'))
            
-        // dispatch(logIn({ ...formData }))
     reset();
   }
 
