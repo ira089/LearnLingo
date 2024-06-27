@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import teacherReducer from './teacherClice';
+import userReducer from './authClice';
 
 export const store = configureStore({
     reducer: {
-        teachers: teacherReducer,
-        // filter: filterReducer,
+        user: userReducer,
     }
 })

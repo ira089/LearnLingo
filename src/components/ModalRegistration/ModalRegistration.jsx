@@ -1,18 +1,26 @@
 import React, {useState} from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as shema from '../../schemas/schema';
+import{getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import { setUser } from '../../redux/authClice';
 import { BiHide } from "react-icons/bi";
 import Button from 'components/Button/Button';
 import styles from '../ModalLogIn/ModalLogIn.module.css'
 
+
  const ModalRegistration = (onClose) => {
   const [visible, setVisible] = useState(false);
  
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const submit = async (evt) => {
+    const 
+    displayName = evt.name;
+    const email = evt.email;
+    const password = evt.password;
+
     const formData = {
           name: evt.name,
           email: evt.email,
@@ -24,7 +32,12 @@ import styles from '../ModalLogIn/ModalLogIn.module.css'
           if (!isValid) {
             return;
            }
-           
+
+           const auth = getAuth();
+           createUserWithEmailAndPassword(auth, email, password, displayName)
+               .then(console.log)
+               .catch(console.error)
+                   
         // dispatch(logIn({ ...formData }))
     reset();
   }

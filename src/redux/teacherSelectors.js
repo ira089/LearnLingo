@@ -1,1 +1,1 @@
-export const selectTeacher = state => state.teachers;
+// export const selectTeacher = state => state.teachers;

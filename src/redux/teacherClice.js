@@ -1,26 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit';
+// import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  items: [],
-       isLoading: false,
-      error: null,
-}
+// const initialState = {
+//   items: [],
+//        isLoading: false,
+//       error: null,
+// }
 
-const teacherSlice = createSlice({
-  name: 'teachers',
-  initialState,
-  reducers:{
-    getTeacher(state, {payload})  {
-      console.log(payload)
+// const teacherSlice = createSlice({
+//   name: 'teachers',
+//   initialState,
+//   reducers:{
+//     getTeacher(state, {payload})  {
+//       console.log(payload)
      
-      state.items = payload;
+//       state.items = payload;
       
-    }
-  }
-})
+//     }
+//   }
+// })
 
-export const {getTeacher} = teacherSlice.actions;
-export default teacherSlice.reducer;
+// export const {getTeacher} = teacherSlice.actions;
+// export default teacherSlice.reducer;
 // import * as teacherOperations from './teacherOperations'
 // import {
 //     handleFulfilled,
