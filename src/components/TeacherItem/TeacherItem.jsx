@@ -1,18 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { IoBookOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { FaStar, FaHeart } from "react-icons/fa6";
+import MoreTeacherItem from 'components/MoreTeacherItem/MoreTeacherItem';
+import Button from 'components/Button/Button';
 import styles from './teacherItem.module.css'
 
  const TeacherItem = ({item, isVariant}) => {
    
     const {variant} = isVariant;
+
     const favorite = false;
+
     const{avatar_url, name, surname, languages, levels, rating, reviews, id,
         price_per_hour, lessons_done, lesson_info, conditions, experience} = item;
 
-        const handleClick = () =>  {
-            console.log('first')
+        const handleClickFavorite = () =>  {
+            console.log('fav')
+        }
+
+        const [activeBtn, setActiveBtn] = useState(false);
+        const handleTabClick = () => {
+          setActiveBtn(true);
+        };
+
+        const bookTrialLesson = () => {
+            console.log('lesson')
         }
 
   return (
@@ -44,7 +57,7 @@ import styles from './teacherItem.module.css'
                 </ul>
                 <div>
                     {variant && 
-                    <button className={styles.btnHeart}  onClick={handleClick} type='submit'>
+                    <button className={styles.btnHeart}  onClick={ handleClickFavorite} type='submit'>
                     {favorite ?  <FaHeart size={24} color=' #f4c550;'/> :  <FaRegHeart size={24}/>}
                     </button> }
                 </div>
@@ -54,13 +67,17 @@ import styles from './teacherItem.module.css'
                 <p className={styles.textP}><span >Lesson Info:</span>{lesson_info} </p>
                 <p className={styles.textP}><span >Conditions:</span>{conditions}</p>
             </div>
-            <button type='button' className={styles.btnRead}>Read more</button>
+            {activeBtn ? 
+            <MoreTeacherItem/> : 
+            <button type='button' className={styles.btnRead} onClick={handleTabClick}>Read more</button>}
+           
             <ul className={styles.listLevel}>
                 {levels.map(level => (
                 <li className={styles.itemLevel}>
                     {level}
                 </li>))}
             </ul>
+            {activeBtn && <Button type='button' onClick={bookTrialLesson}>Book trial lesson</Button>}
         </div>
     </li>
   )
