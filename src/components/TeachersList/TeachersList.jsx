@@ -3,9 +3,9 @@ import React, { useEffect, useState, useRef} from 'react'
 // import * as teacherSelectors from '../../redux/teacherSelectors';
 // import * as teacherOperations from '../../redux/teacherOperations';
 // import { getTeacher } from '../../redux/teacherClice'; 
-// import styles from './teachersList.module.css';
+import styles from './teachersList.module.css';
 import TeacherItem from 'components/TeacherItem/TeacherItem'
-// import {database} from '../../firebase/firebase'
+import Button from 'components/Button/Button';
 import {  ref,  query, limitToFirst, startAfter, getDatabase, orderByKey, get} from "firebase/database";
 
 
@@ -61,19 +61,32 @@ import {  ref,  query, limitToFirst, startAfter, getDatabase, orderByKey, get} f
   }; 
   console.log(teachers)
 
+  const isVariant = { variant: true};
+  const elements = teachers.map(item => (
+    <TeacherItem
+      key={item.id}
+      item={item}
+      isVariant={isVariant}
+    />
+  ));
+
+  const isItems = Boolean(teachers.length);
+
+
 
   return (
-    <div>
-      <TeacherItem teachers={teachers}/>
+    <div className={styles.wraplist}>
       {loading && <p>Loading...</p>}
-      {!loading && lastKey && <button onClick={loadMoreTeachers}>Load More</button>}
-
+      {isItems && <ul >{elements}</ul>}
+      {!loading && lastKey && 
+      <div className={styles.bntLoad}>
+         <Button type='button' onClick={loadMoreTeachers}>Load More</Button>
+      </div>}
+      
     </div>
-    
   )
 }
 
 export default TeachersList
 
-// let queryNew =  query(ref(database, 'teachers'), limitToFirst(4));
-// console.log(queryNew)
+
