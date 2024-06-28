@@ -118,6 +118,7 @@ margin-bottom: 16px;
     list-style-type: none;
     display: flex;
     align-items: center; 
+    padding: 0;
 }
 
 .itemLevel {
@@ -134,10 +135,12 @@ padding: 8px 12px;
 
 .listLevel .itemLevel:not(:first-child) {
     border: 1px solid rgba(18, 20, 23, 0.2);
-    background: transparent
-    
-    
+    background: transparent;
 }
-    ; 
+
+.btnLesson {
+    margin-top: 32px;
+}
+    
 
 

@@ -12,8 +12,8 @@ import styles from './teacherItem.module.css'
 
     const favorite = false;
 
-    const{avatar_url, name, surname, languages, levels, rating, reviews, id,
-        price_per_hour, lessons_done, lesson_info, conditions, experience} = item;
+    const{avatar_url, name, surname, languages, levels, rating, id,
+        price_per_hour, lessons_done, lesson_info, conditions} = item;
 
         const handleClickFavorite = () =>  {
             console.log('fav')
@@ -68,7 +68,7 @@ import styles from './teacherItem.module.css'
                 <p className={styles.textP}><span >Conditions:</span>{conditions}</p>
             </div>
             {activeBtn ? 
-            <MoreTeacherItem/> : 
+            <MoreTeacherItem item={item}/> : 
             <button type='button' className={styles.btnRead} onClick={handleTabClick}>Read more</button>}
            
             <ul className={styles.listLevel}>
@@ -77,7 +77,10 @@ import styles from './teacherItem.module.css'
                     {level}
                 </li>))}
             </ul>
-            {activeBtn && <Button type='button' onClick={bookTrialLesson}>Book trial lesson</Button>}
+            {activeBtn &&
+             <div className={styles.btnLesson}>
+                <Button  type='button' onClick={bookTrialLesson}>Book trial lesson</Button>
+            </div>}
         </div>
     </li>
   )
